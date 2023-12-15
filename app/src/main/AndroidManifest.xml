@@ -18,7 +18,13 @@
             android:name=".HomeActivity"
             android:exported="true" />
         <activity
+            android:name=".ShortsActivity"
+            android:exported="true" />
+        <activity
             android:name=".ChatActivity"
+            android:exported="true" />
+        <activity
+            android:name=".VideoTestActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
