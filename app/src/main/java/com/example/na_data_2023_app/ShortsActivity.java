@@ -80,6 +80,10 @@ public class ShortsActivity extends Fragment {
     public void onResume() {
         super.onResume();
         Log.i("superdroid", "VideoActivity: onResume(): ");
+        if (mVideoView != null && !mVideoView.isPlaying()) {
+            mVideoView.seekTo(0);
+            mVideoView.start();
+        }
     }
 
     private void playVideo(int position) {
@@ -95,7 +99,7 @@ public class ShortsActivity extends Fragment {
             mVideoView.seekTo(0);
             mVideoView.start();
         }
-        Log.i("superdroid", "VideoActivity: onCreateView(): onPageSelected(): " + position + " video start");
+        Log.i("superdroid", "VideoActivity: playVideo(): " + position + " video start");
 
         mVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
