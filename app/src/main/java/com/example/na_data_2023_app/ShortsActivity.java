@@ -21,8 +21,13 @@ public class ShortsActivity extends Fragment {
     int currentPostion;
     private String[] videos = new String[] {
 //            "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-            "android.resource://" + "com.example.na_data_2023_app" + "/raw/sample1",
+//            "android.resource://" + "com.example.na_data_2023_app" + "/raw/sample1",
 //            "android.resource://" + activity.getPackageName() + "/raw/sample1",
+            "android.resource://" + "com.example.na_data_2023_app" + "/raw/video1",
+            "android.resource://" + "com.example.na_data_2023_app" + "/raw/video2",
+            "android.resource://" + "com.example.na_data_2023_app" + "/raw/video3",
+            "android.resource://" + "com.example.na_data_2023_app" + "/raw/video4",
+            "android.resource://" + "com.example.na_data_2023_app" + "/raw/video5",
     };
     private VideoView mVideoView = null;
 
