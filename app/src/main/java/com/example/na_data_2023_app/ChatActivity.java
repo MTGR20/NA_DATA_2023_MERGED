@@ -1,17 +1,29 @@
 package com.example.na_data_2023_app;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +35,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -41,6 +54,12 @@ public class ChatActivity extends Fragment {
     ImageButton sendButton;
     List<Message> messageList;
     MessageAdapter messageAdapter;
+    Intent intent;
+    SpeechRecognizer mRecognizer;
+    final int PERMISSION = 1;
+    private TextToSpeech tts;
+    GestureDetector gd;
+    GestureDetector.OnDoubleTapListener glistener;
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     OkHttpClient client = new OkHttpClient().newBuilder()
             .connectTimeout(60, TimeUnit.SECONDS)
@@ -78,6 +97,95 @@ public class ChatActivity extends Fragment {
         llm.setStackFromEnd(true);
         recyclerView.setLayoutManager(llm);
 
+        // TTS 설정
+        tts = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status!=android.speech.tts.TextToSpeech.ERROR) {
+                    tts.setLanguage(Locale.KOREAN);
+                }
+            }
+        });
+
+        // STT 설정
+        if ( Build.VERSION.SDK_INT >= 23 ){
+            // 권한 확인
+            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.INTERNET,
+                    Manifest.permission.RECORD_AUDIO},PERMISSION);
+        }
+
+        intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getActivity().getPackageName());
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"ko-KR");
+
+
+        gd = new GestureDetector(getActivity(), new GestureDetector.OnGestureListener() {
+            @Override
+            public boolean onDown(MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public void onShowPress(MotionEvent e) {
+
+            }
+
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
+                //Log.d("싱글탭", "onSingleTapUp: ");
+                return false;
+            }
+
+            @Override
+            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+                return false;
+            }
+
+            @Override
+            public void onLongPress(MotionEvent e) {
+
+            }
+
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                return false;
+            }
+        });
+
+        glistener = new GestureDetector.OnDoubleTapListener() {
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+                Log.d("더블탭", "onDoubleTapUp: ");
+                mRecognizer = SpeechRecognizer.createSpeechRecognizer(getActivity().getApplicationContext());
+                mRecognizer.setRecognitionListener(listener);
+                mRecognizer.startListening(intent);
+                return true;
+            }
+
+            @Override
+            public boolean onDoubleTapEvent(MotionEvent e) {
+                return false;
+            }
+        };
+
+        gd.setOnDoubleTapListener(glistener);
+
+        recyclerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(gd != null){
+                    gd.onTouchEvent(event);
+                    return true;
+                }
+                return false;
+            }
+        });
+
 //        sendButton.setOnClickListener((v)->{
 //            String question = messageEditText.getText().toString().trim();
 //            addToChat(question, Message.SENT_BY_ME);
@@ -100,6 +208,100 @@ public class ChatActivity extends Fragment {
         return v;
     }
 
+    private RecognitionListener listener = new RecognitionListener() {
+        @Override
+        public void onReadyForSpeech(Bundle params) {
+            Toast.makeText(activity.getApplicationContext(),"음성인식을 시작합니다.",Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onBeginningOfSpeech() {
+        }
+
+        @Override
+        public void onRmsChanged(float v) {
+        }
+
+        @Override
+        public void onBufferReceived(byte[] bytes) {
+        }
+
+        @Override
+        public void onEndOfSpeech() {
+        }
+
+        @Override
+        public void onError(int error) {
+            String message;
+
+            switch (error) {
+                case SpeechRecognizer.ERROR_AUDIO:
+                    message = "오디오 오류";
+                    break;
+                case SpeechRecognizer.ERROR_CLIENT:
+                    message = "앱 오류";
+                    break;
+                case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
+                    message = "권한이 없음";
+                    break;
+                case SpeechRecognizer.ERROR_NETWORK:
+                    message = "네트워크 에러";
+                    break;
+                case SpeechRecognizer.ERROR_NETWORK_TIMEOUT:
+                    message = "네트워크 타임아웃";
+                    break;
+                case SpeechRecognizer.ERROR_NO_MATCH:
+                    message = "다시 시도해 주세요.";
+                    break;
+                case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
+                    message = "RECOGNIZER가 바쁨";
+                    break;
+                case SpeechRecognizer.ERROR_SERVER:
+                    message = "서버 오류";
+                    break;
+                case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
+                    message = "대기시간 초과";
+                    break;
+                default:
+                    message = "알 수 없는 오류 발생";
+                    break;
+            }
+            Toast.makeText(activity.getApplicationContext(), "에러가 발생하였습니다. : " + message,Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onResults(Bundle results) {
+            // 말을 하면 ArrayList에 단어를 넣고 textView에 단어를 이어줌.
+            ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+
+            for(int i = 0; i < matches.size() ; i++){
+                messageEditText.setText(matches.get(i));
+            }
+            sendButton.performClick();
+        }
+
+        @Override
+        public void onPartialResults(Bundle bundle) {
+
+        }
+
+        @Override
+        public void onEvent(int i, Bundle bundle) {
+
+        }
+    };
+
+    // TTS 객체 정리
+    @Override
+    public void onDestroy() {
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+            tts = null;
+        }
+        super.onDestroy();
+    }
+
     void addToChat(String message, String sentBy) {
         activity.runOnUiThread(new Runnable() {
             @Override
@@ -114,6 +316,11 @@ public class ChatActivity extends Fragment {
     void addResponse(String response) {
         messageList.remove(messageList.size() - 1);
         addToChat(response, Message.SENT_BY_BOT);
+
+        // TTS
+        tts.setPitch(1.0f);
+        tts.setSpeechRate(1.0f);
+        tts.speak(response, TextToSpeech.QUEUE_FLUSH, null, null);
     }
 
     void callAPI(String question) {
