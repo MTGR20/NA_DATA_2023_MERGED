@@ -3,15 +3,11 @@ package com.example.na_data_2023_app;
 import android.app.Activity;
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.MediaController;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
@@ -24,8 +20,9 @@ public class ShortsActivity extends Fragment {
     ViewPager2 sliderViewPager;
     int currentPostion;
     private String[] videos = new String[] {
-            "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
-//            "app/src/main/res/videos/sample1.mp4"
+//            "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+            "android.resource://" + "com.example.na_data_2023_app" + "/raw/sample1",
+//            "android.resource://" + activity.getPackageName() + "/raw/sample1",
     };
     private VideoView mVideoView = null;
 
