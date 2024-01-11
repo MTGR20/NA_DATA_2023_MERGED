@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -25,12 +26,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -69,6 +72,7 @@ public class ChatActivity extends Fragment {
 
     private static final String API_KEY = BuildConfig.API_KEY;
     private static final String questionOption = "10글자 내로 대답해줘.";
+    private int action;
 
     @Override
     public void onAttach(Context context) {
@@ -175,11 +179,17 @@ public class ChatActivity extends Fragment {
 
         gd.setOnDoubleTapListener(glistener);
 
+        mScaleGestureDetector = new ScaleGestureDetector(activity, new ScaleListener());
+
         recyclerView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(gd != null){
                     gd.onTouchEvent(event);
+
+                    if (mScaleGestureDetector != null) {
+                        mScaleGestureDetector.onTouchEvent(event);
+                    }
                     return true;
                 }
                 return false;
@@ -375,5 +385,31 @@ public class ChatActivity extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    private ScaleGestureDetector mScaleGestureDetector;
+    private int mScaleFactor = 1;
+
+    private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+
+        @Override
+        public boolean onScale(ScaleGestureDetector scaleGestureDetector){
+            // ScaleGestureDetector에서 factor를 받아 변수로 선언한 factor에 넣고
+            mScaleFactor *= scaleGestureDetector.getScaleFactor();
+
+            // 최대 10배, 최소 10배 줌 한계 설정
+            mScaleFactor = Math.max(18,
+                    Math.min(mScaleFactor, 50));
+
+            // 글자 크기 조절
+            messageAdapter.setTextSize(mScaleFactor);
+//            FragmentTransaction ft = getFragmentManager().beginTransaction();
+//            ft.detach(this).attach(this).commit();
+            messageAdapter.notifyDataSetChanged();
+
+            Log.i("superdroid", "CharActivity: ScaleListener: onScale: Text Size is " + mScaleFactor);
+
+            return true;
+        }
     }
 }
