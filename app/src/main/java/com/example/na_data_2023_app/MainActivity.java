@@ -1,6 +1,7 @@
 package com.example.na_data_2023_app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.splashscreen.SplashScreen;
 
 import android.content.Intent;
 import android.os.Bundle;
