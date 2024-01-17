@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/left_chat_view"
         android:background="@drawable/rounded_corner"
-        android:backgroundTint="#1E88E5"
+        android:backgroundTint="#FFFFFF"
         android:padding="8dp"
         android:layout_marginEnd="80dp"
         >
@@ -17,8 +17,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/left_chat_text_view"
-            android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:text="안녕 만나서 반가워"
+            android:textStyle="bold"
             />
     </LinearLayout>
     <LinearLayout
@@ -27,7 +29,7 @@
         android:id="@+id/right_chat_view"
         android:layout_alignParentEnd="true"
         android:background="@drawable/rounded_corner"
-        android:backgroundTint="#FF7FD4"
+        android:backgroundTint="#FFEB3B"
         android:padding="8dp"
         android:layout_marginStart="80dp"
         >
@@ -35,8 +37,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/right_chat_text_view"
-            android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:text="안녕 만나서 반가워"
+            android:textStyle="bold"
             />
     </LinearLayout>
 

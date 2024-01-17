@@ -407,6 +407,7 @@ public class ChatActivity extends Fragment {
 //            ft.detach(this).attach(this).commit();
             messageAdapter.notifyDataSetChanged();
 
+//            Toast.makeText(activity, "글자 크기 " + mScaleFactor, Toast.LENGTH_SHORT).show();
             Log.i("superdroid", "CharActivity: ScaleListener: onScale: Text Size is " + mScaleFactor);
 
             return true;

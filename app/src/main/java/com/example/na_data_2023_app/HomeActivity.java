@@ -33,10 +33,10 @@ public class HomeActivity extends AppCompatActivity {
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 switch (position) {
                     case 0:
-                        tab.setText("SHORTS");
+                        tab.setText("쇼츠");
                         break;
                     case 1:
-                        tab.setText("CHAT");
+                        tab.setText("챗봇");
                         break;
                     default:
                         tab.setText("Tab " + (position + 1));
