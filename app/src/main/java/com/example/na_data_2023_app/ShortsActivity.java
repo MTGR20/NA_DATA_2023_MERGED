@@ -85,8 +85,8 @@ public class ShortsActivity extends Fragment {
         Log.i("superdroid", "VideoActivity: onResume(): ");
         if (mVideoView != null && !mVideoView.isPlaying()) {
             mVideoView.seekTo(0);
-            mVideoView.start();
-            mVideoView.pause();
+//            mVideoView.start();
+//            mVideoView.pause();
             new Handler().postDelayed(new Runnable()
             {
                 @Override
@@ -94,7 +94,7 @@ public class ShortsActivity extends Fragment {
                 {
                     mVideoView.start();
                 }
-            }, 1800);
+            }, 1600);
         }
     }
 

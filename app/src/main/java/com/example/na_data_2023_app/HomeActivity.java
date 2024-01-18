@@ -60,7 +60,7 @@ public class HomeActivity extends AppCompatActivity {
                 if (tab.getPosition() ==0) {
                     tts.speak("shorts 화면입니다.", TextToSpeech.QUEUE_FLUSH, null, null);
                 }else if (tab.getPosition() == 1){
-                    tts.speak("ChatBot 화면입니다.", TextToSpeech.QUEUE_FLUSH, null, null);
+                    tts.speak("ChatBot 화면입니다. 화면을 두 번 클릭해 대화를 시작해보세요.", TextToSpeech.QUEUE_FLUSH, null, null);
                 }
             }
             @Override

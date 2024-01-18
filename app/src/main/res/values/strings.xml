@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">NA_DATA_2023_APP</string>
+    <string name="app_name">듣말국</string>
+    <string name="video_description">쇼츠 재생중. 다른 쇼츠를 재생하려면 두 손가락으로 위 아래로 스와이프하세요</string>
 </resources>
