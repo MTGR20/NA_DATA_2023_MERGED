@@ -24,6 +24,9 @@
         <activity
             android:name=".VideoTestActivity"
             android:exported="true" />
+        <activity
+            android:name=".DBmanage"
+            android:exported="true" />
 
         <!-- 시작 후 2초동안 보여지는 부분 -->
         <activity
