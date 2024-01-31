@@ -11,15 +11,18 @@
         android:layout_height="match_parent"
         android:id="@+id/recycler_view"
         android:layout_above="@id/bottom_layout"
+        android:background="@color/black"
         />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/welcome_text"
         android:layout_centerInParent="true"
-        android:text="반갑습니다!\n궁금한 것을 물어보세요"
+        android:text="반갑습니다!\n대화를 시작해보세요"
         android:gravity="center"
         android:textSize="28dp"
+        android:textColor="#FFEB3B"
+        android:textStyle="bold"
         />
 
     <RelativeLayout
@@ -27,7 +30,8 @@
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:padding="8dp"
-        android:id="@+id/bottom_layout">
+        android:id="@+id/bottom_layout"
+        android:background="@color/black">
 
         <EditText
             android:id="@+id/message_edit_text"
@@ -36,8 +40,11 @@
             android:layout_centerInParent="true"
             android:layout_toLeftOf="@id/send_btn"
             android:background="@drawable/rounded_corner"
-            android:hint="Write here "
-            android:padding="16dp"/>
+            android:hint="국회에 대해 물어보세요"
+            android:textColorHint="@color/white"
+            android:padding="16dp"
+            android:textColor="@color/white"
+            />
         <ImageButton
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -48,6 +55,7 @@
             android:padding="8dp"
             android:src="@drawable/baseline_send_24"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="전송"
             />
 
     </RelativeLayout>

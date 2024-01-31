@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,7 +85,16 @@ public class ShortsActivity extends Fragment {
         Log.i("superdroid", "VideoActivity: onResume(): ");
         if (mVideoView != null && !mVideoView.isPlaying()) {
             mVideoView.seekTo(0);
-            mVideoView.start();
+//            mVideoView.start();
+//            mVideoView.pause();
+            new Handler().postDelayed(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    mVideoView.start();
+                }
+            }, 1600);
         }
     }
 

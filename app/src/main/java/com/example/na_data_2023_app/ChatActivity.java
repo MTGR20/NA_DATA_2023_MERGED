@@ -204,6 +204,15 @@ public class ChatActivity extends Fragment {
 //            welcomeTextView.setVisibility(View.GONE);
 //        });
 
+        messageEditText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                tts.speak("국회에 대해 물어보세요", TextToSpeech.QUEUE_FLUSH, null, null);
+                return false;
+            }
+        });
+
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -407,6 +416,7 @@ public class ChatActivity extends Fragment {
 //            ft.detach(this).attach(this).commit();
             messageAdapter.notifyDataSetChanged();
 
+//            Toast.makeText(activity, "글자 크기 " + mScaleFactor, Toast.LENGTH_SHORT).show();
             Log.i("superdroid", "CharActivity: ScaleListener: onScale: Text Size is " + mScaleFactor);
 
             return true;
