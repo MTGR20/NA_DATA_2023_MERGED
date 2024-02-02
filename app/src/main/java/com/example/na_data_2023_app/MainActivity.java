@@ -18,6 +18,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        startActivity(new Intent(this, DBmanage.class));
+        startActivity(new Intent(this, HomeActivity.class));
     }
 }
