@@ -18,8 +18,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "articleTBL";
     // 테이블 항목 이름
     public static final String COL_1 = "ID";
-    public static final String COL_2 = "Date";
-    public static final String COL_3 = "Script";
+    public static final String COL_2 = "Question";
 
     public SQLiteHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -27,7 +26,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE "+TABLE_NAME +" (Id integer PRIMARY KEY AUTOINCREMENT NOT NULL, Date text, Script text);");
+        db.execSQL("CREATE TABLE "+TABLE_NAME +" (Id integer PRIMARY KEY AUTOINCREMENT NOT NULL, Question text);");
     }
 
     @Override
@@ -37,11 +36,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
     // 데이터 추가
-    public boolean insertData(String date, String script){
+    public boolean insertData(String question){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_2, date);
-        contentValues.put(COL_3, script);
+        contentValues.put(COL_2, question);
         long result = db.insert(TABLE_NAME, null, contentValues);
         if(result == -1)
             return false;
@@ -57,12 +55,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
     // 데이터 수정 (업데이트)
-    public boolean updateData(String id, String date, String script){
+    public boolean updateData(String id, String question){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1, id);
-        contentValues.put(COL_2, date);
-        contentValues.put(COL_3, script);
+        contentValues.put(COL_2, question);
         db.update(TABLE_NAME, contentValues, "Id = ?", new String[] { id });
         return true;
     }

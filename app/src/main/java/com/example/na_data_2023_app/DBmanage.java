@@ -20,10 +20,10 @@ public class DBmanage extends AppCompatActivity {
         SQLiteHelper sqLiteHelper = new SQLiteHelper(this);
 
         // 데이터 추가
-        //sqLiteHelper.insertData("2022-01-01", "첫번째 스크립트");
+        sqLiteHelper.insertData("두번째 질문");
 
         // 데이터 삭제
-        sqLiteHelper.deleteData("7");
+        //sqLiteHelper.deleteData("7");
 
         // 데이터 조회
         Cursor cursor;
@@ -35,8 +35,7 @@ public class DBmanage extends AppCompatActivity {
         StringBuffer buffer = new StringBuffer();
         while(cursor.moveToNext()){
             buffer.append("Id : "+ cursor.getString(0) + "\n");
-            buffer.append("Date : "+ cursor.getString(1) + "\n");
-            buffer.append("Script : "+ cursor.getString(2) + "\n");
+            buffer.append("Question : "+ cursor.getString(1) + "\n");
         }
         System.out.println(buffer);
 
