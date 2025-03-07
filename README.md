@@ -1,4 +1,5 @@
 # 🗣️듣말국: 듣고 말하는 국회👂
+📺 [듣말국 시연영상 보러가기](https://youtu.be/4Ig8rZNrFz4)  
 
 🔗 [듣말국 앱 다운로드하기 (Android)](https://github.com/MTGR20/NA_DATA_2023_MERGED/releases/download/v1.0.0/app-release.apk)
 
@@ -63,7 +64,6 @@
 **⇒ 트랜디한 서비스이면서 소리를 통해 정보를 전달할 수 있는 쇼츠와 챗봇**
 
 ## **✨** 서비스 소개
-[![Video Label](http://img.youtube.com/vi/4Ig8rZNrFz4/0.jpg)](https://youtu.be/4Ig8rZNrFz4)
 
 ### 1) 사용자 맞춤형 쇼츠
 
