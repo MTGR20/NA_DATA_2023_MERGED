@@ -1,5 +1,5 @@
 # 🗣️듣말국: 듣고 말하는 국회👂
-📺 [듣말국 시연영상 보러가기](https://youtu.be/4Ig8rZNrFz4)  
+📺 [듣말국 시연영상 보러가기 (Youtube)](https://youtu.be/4Ig8rZNrFz4)  
 
 🔗 [듣말국 앱 다운로드하기 (Android)](https://github.com/MTGR20/NA_DATA_2023_MERGED/releases/download/v1.0.0/app-release.apk)
 
