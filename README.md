@@ -8,9 +8,33 @@
   
 ![포스터](https://github.com/user-attachments/assets/960c902a-acd0-4814-92eb-e43e7f220e78)
 
-## **🐣** 팀원 및 개발 파트 (팀소개)
+## **🐣** 팀원 및 개발 파트 (팀소개)  
+
+|**김유림**|**은지우**|**조예원**|
+|---|---|---|
+|앱 구성 및 DB|쇼츠|챗봇|  
+
 
 ## **💻** 개발 환경
+#### 사용언어  
+<img src="https://img.shields.io/badge/Java-F44336?style=flat-square&logo=amazons3&logoColor=white"/>  
+
+#### DBMS  
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white"/> : 숏츠 생성을 위한 스크립트 저장  
+
+#### AI 영상 제작
+<img src="https://img.shields.io/badge/플루닛 스튜디오-a84edb?style=flat-square&logo=ploonet&logoColor=white"/> : 숏츠 영상 생성  
+
+#### 개발환경  
+<img src="https://img.shields.io/badge/Android Studio-3DDC84?style=flat-square&logo=androidstudio&logoColor=white"/> : 챗봇, 쇼츠 화면 등 안드로이드 앱 개발  
+<img src="https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=flat-square&logo=intellij-idea&logoColor=white"/> : Open API에서 가져온 뉴스 기사를 파싱하여 스크립트를 생성하고, 이를 활용해 AI 영상 제작  
+
+#### 사용 API  
+<img src="https://img.shields.io/badge/chatGPT API-000000?style=flat-square&logo=chatgpt&logoColor=white"/> : 사용자 질의응답 및 숏츠 생성 스크립트 요약  
+<img src="https://img.shields.io/badge/열린국회정보포털 open API-000000?style=flat-square&logo=na&logoColor=white"/> : 숏츠 생성을 위한 뉴스 기사 수집  
+<img src="https://img.shields.io/badge/Google Cloud Text to Speech-4285F4?style=flat-square&logo=googlecloud&logoColor=white"/>
+<img src="https://img.shields.io/badge/Google Cloud Speech to Text-4285F4?style=flat-square&logo=googlecloud&logoColor=white"/> : 챗봇 사용 시 음성 상호작용  
+
 
 ## **✏️** 제안 배경
 
@@ -39,6 +63,7 @@
 **⇒ 트랜디한 서비스이면서 소리를 통해 정보를 전달할 수 있는 쇼츠와 챗봇**
 
 ## **✨** 서비스 소개
+[![Video Label](http://img.youtube.com/vi/4Ig8rZNrFz4/0.jpg)](https://youtu.be/4Ig8rZNrFz4)
 
 ### 1) 사용자 맞춤형 쇼츠
 
